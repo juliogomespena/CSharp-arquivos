@@ -9,9 +9,9 @@ internal class ByteBankIn
     {
         List<string> accountsList = new();
 
-        using (var accounts = new FileStream(filePath, FileMode.Open))
+        using (var fileStream = new FileStream(filePath, FileMode.Open))
         {
-            var reader = new StreamReader(accounts);
+            var reader = new StreamReader(fileStream);
 
             while (!reader.EndOfStream) // Ler todo o arquivo até o fim do fluxo, linha a linha
             {

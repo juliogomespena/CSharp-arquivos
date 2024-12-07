@@ -72,5 +72,19 @@ class Program
             Console.WriteLine(account.ToString());
             Console.WriteLine();
         }
+
+        try
+        {
+            var file = ByteBankOut.CreateAccountsFile(accounts);
+            Console.WriteLine($"Arquivo de contas correntes criado com sucesso! ({Path.GetFullPath(file)})");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Erro ao criar arquivo de contas correntes! {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ocorreu um erro inesperado: {ex.Message}");
+        }
     }
 }

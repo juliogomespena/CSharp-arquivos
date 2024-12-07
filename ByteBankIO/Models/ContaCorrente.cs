@@ -23,11 +23,11 @@ public class ContaCorrente
         var agenciaInfo = int.TryParse(accountInfo[0], out int agencia) ? agencia : throw new ArgumentException($"Número de agência \"{accountInfo[0]}\" inválido!");
         var numeroInfo = int.TryParse(accountInfo[1], out int numero) ? numero : throw new ArgumentException($"Número de conta \"{accountInfo[1]}\" inválido!");
         var saldoInfo = decimal.TryParse(accountInfo[2].Replace('.', ','), out decimal saldo) ? saldo : throw new ArgumentException($"Saldo para conta/agência {numero}/{agencia} inválido!");
-        var titular = accountInfo[3];
+        var nome = accountInfo[3].Split(' ', 2);
         var cpf = accountInfo[4];
         var profissao = accountInfo[5];
 
-        return new ContaCorrente(agencia, numero, saldo, new Cliente(titular, cpf, profissao));
+        return new ContaCorrente(agencia, numero, saldo, new Cliente(nome[0],nome[1], cpf, profissao));
     }
 
     public void Deposit(decimal valor)
@@ -57,7 +57,7 @@ public class ContaCorrente
 
     public override string ToString()
     {
-        return $"- Titular: {Titular.Nome}\n" +
+        return $"- Titular: {Titular.Nome} {Titular.Sobrenome}\n" +
                $"- CPF: {Titular.CPF}\n" +
                $"- Profissão: {Titular.Profissao}\n" +
                $"- Número da conta: {Numero}\n" +
